@@ -15,7 +15,7 @@ function Hero() {
         <a className="button button-dark" href="#work">View selected work <span>↓</span></a>
       </div>
       <div className="hero-simple-art">
-        <img src="/sarah-cartoon.jpg" alt="Cartoon illustration of Sarah" />
+        <img src="/sarah-cartoon.png" alt="Cartoon illustration of Sarah" />
       </div>
     </main>
   </section>
