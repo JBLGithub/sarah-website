@@ -1,6 +1,6 @@
 # Sarah — Materials & Process Engineering
 
-A responsive React, Vite and TypeScript portfolio concept. The hero uses an editable SVG character and a scroll-linked rope detail; the rest of the page presents Sarah's materials and process research.
+A responsive React, Vite and TypeScript portfolio concept. The hero uses a static cartoon illustration and a short introduction; the rest of the page presents Sarah's materials and process research.
 
 ## Run locally
 

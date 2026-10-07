@@ -1,61 +1,23 @@
-import { useEffect, useRef, useState } from 'react'
-import SarahCharacter from './SarahCharacter'
-
 const Arrow = () => <span aria-hidden="true">↗</span>
 
-function useScrollProgress(ref: React.RefObject<HTMLElement | null>) {
-  const [progress, setProgress] = useState(0)
-  useEffect(() => {
-    const element = ref.current
-    if (!element) return
-    let frame = 0
-    const update = () => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => {
-        const rect = element.getBoundingClientRect()
-        const range = element.offsetHeight - window.innerHeight
-        setProgress(Math.max(0, Math.min(1, -rect.top / Math.max(range, 1))))
-      })
-    }
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
-    return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', update); window.removeEventListener('resize', update) }
-  }, [ref])
-  return progress
-}
-
 function Hero() {
-  const scene = useRef<HTMLElement>(null)
-  const progress = useScrollProgress(scene)
-  const ropeStyle = { '--pull': `${progress * 92}px`, '--tension': `${progress}` } as React.CSSProperties
-  return <section className="hero-scene" ref={scene} style={ropeStyle} id="top">
-    <div className="hero-sticky">
-      <div className="hero-grid" aria-hidden="true" />
-      <header className="site-header wrap">
-        <a className="wordmark" href="#top"><span className="mark">S.</span> Sarah <small>Materials engineer</small></a>
-        <nav aria-label="Main navigation"><a href="#work">Selected work</a><a href="#about">About</a><a href="#contact" className="nav-contact">Get in touch <Arrow /></a></nav>
-      </header>
-      <main className="hero wrap">
-        <div className="hero-copy">
-          <div className="eyebrow"><span className="status-dot"/> MATERIALS · MODELLING · PROCESS</div>
-          <h1>Making the invisible<br/><em>behave.</em></h1>
-          <p className="hero-lede">I’m Sarah, a materials engineer working where physical chemistry, predictive modelling and real-world processes meet.</p>
-          <div className="hero-actions"><a className="button button-dark" href="#work">Explore my work <span>↓</span></a><a className="text-link" href="#about">A little about me <Arrow /></a></div>
-          <div className="hero-note"><span className="note-line"/>Research & development<br/>with a practical edge</div>
-        </div>
-        <div className="hero-art" aria-label="Sarah character illustration with material sample">
-          <div className="art-label label-top"><span>01 / FIELD NOTES</span><i>NL · EU</i></div>
-          <div className="orbit orbit-one"/><div className="orbit orbit-two"/>
-          <div className="sample-card"><div className="sample-heading"><span>MICROSTRUCTURE</span><b>× 240</b></div><svg viewBox="0 0 138 88" aria-label="Illustrated material microstructure"><rect x="1" y="1" width="136" height="86" rx="3" fill="#f1e7d2"/><path d="M0 37 31 9l31 26 30-33 47 33M0 76l29-34 33 32 31-30 44 38" fill="none" stroke="#759295" strokeWidth="1.5"/><g fill="#d5b373"><circle cx="31" cy="9" r="4"/><circle cx="62" cy="35" r="4"/><circle cx="92" cy="2" r="4"/><circle cx="29" cy="42" r="4"/><circle cx="62" cy="74" r="4"/><circle cx="93" cy="44" r="4"/></g></svg><div className="sample-caption">grain boundary / 14.2 μm</div></div>
-          <div className="character-halo"/><SarahCharacter className="sarah-character"/>
-          <div className="art-label label-bottom"><span>OBSERVE → MODEL → TEST</span><i>↘</i></div>
-          <svg className="pull-rope" viewBox="0 0 80 360" aria-hidden="true"><path d="M39 0 C41 64 37 112 40 170 C43 228 38 287 40 360"/><circle cx="40" cy="338" r="10"/><circle cx="40" cy="338" r="3"/></svg>
-          <div className="scroll-prompt"><span className="scroll-wheel"/> Scroll to pull <b>↓</b></div>
-        </div>
-      </main>
-      <div className="hero-footer wrap"><span>THOUGHTFUL BY DESIGN</span><span>SCROLL TO EXPLORE <b>↓</b></span><span>01 — 04</span></div>
-    </div>
+  return <section className="hero-simple" id="top">
+    <div className="hero-simple-grid" aria-hidden="true" />
+    <header className="site-header wrap">
+      <a className="wordmark" href="#top"><span className="mark">S.</span> Sarah <small>Materials engineer</small></a>
+      <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#contact" className="nav-contact">Contact <Arrow /></a></nav>
+    </header>
+    <main className="hero-simple-main wrap">
+      <div className="hero-simple-copy">
+        <span className="eyebrow">MATERIALS ENGINEER</span>
+        <h1>Sarah</h1>
+        <p>Materials · Modelling · Process</p>
+        <a className="button button-dark" href="#work">View selected work <span>↓</span></a>
+      </div>
+      <div className="hero-simple-art">
+        <img src="/sarah-cartoon.jpg" alt="Cartoon illustration of Sarah" />
+      </div>
+    </main>
   </section>
 }
 
